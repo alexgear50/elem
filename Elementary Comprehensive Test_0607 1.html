@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elementary English — Comprehensive Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6EC; --paper2:#F3EEDF; --ink:#1E2A3A; --ink-soft:#4B5768;
+  --rule:#D8CEB4; --gold:#A8853B; --pen:#B23A2E; --ok:#2E6B4F; --bad:#B23A2E;
+  box-sizing:border-box;
+}
+*{box-sizing:inherit}
+html,body{margin:0;padding:0;background:var(--paper2);color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+body{-webkit-font-smoothing:antialiased;}
+.wrap{max-width:800px;margin:0 auto;padding:28px 20px 80px;}
+.masthead{text-align:center;border-bottom:3px double var(--ink);padding-bottom:16px;margin-bottom:22px;}
+.masthead .kicker{font-size:12.5px;letter-spacing:.04em;color:var(--ink-soft);}
+.masthead h1{font-family:'Lora',Georgia,serif;font-weight:600;font-size:clamp(24px,4vw,32px);margin:6px 0 8px;}
+.masthead .meta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;font-size:13.5px;color:var(--ink-soft);}
+.fields{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:12px;font-size:13.5px;}
+.fields input{border:none;border-bottom:1px solid var(--ink-soft);background:transparent;padding:2px 4px;
+  font-family:inherit;font-size:13.5px;width:150px;}
+.tabs{display:flex;gap:6px;margin:0 0 20px;flex-wrap:wrap;}
+.tab{flex:1;min-width:120px;text-align:center;padding:10px 8px;border:1px solid var(--rule);
+  background:var(--paper);cursor:pointer;font-size:13.5px;font-weight:600;color:var(--ink-soft);
+  border-radius:3px 3px 0 0;border-bottom:none;}
+.tab .n{display:block;font-family:'Lora',serif;font-size:11px;font-style:italic;font-weight:500;color:var(--gold);}
+.tab.active{background:var(--paper);color:var(--ink);border-color:var(--ink);position:relative;top:1px;}
+.tab:not(.active){background:var(--paper2);}
+.panel{display:none;background:var(--paper);border:1px solid var(--ink);border-top:3px solid var(--ink);padding:26px 24px;}
+.panel.active{display:block;}
+.passage{background:var(--paper2);border-left:3px solid var(--gold);padding:16px 18px;margin-bottom:20px;}
+.passage h3{font-family:'Lora',serif;font-size:18px;margin:0 0 4px;}
+.passage .sub{font-size:12px;color:var(--ink-soft);font-style:italic;margin-bottom:10px;}
+.passage p{font-family:'Lora',serif;font-size:15.5px;line-height:1.65;color:#2A3444;margin:0 0 10px;}
+.qgroup-label{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);font-weight:700;
+  margin:22px 0 10px;border-bottom:1px solid var(--rule);padding-bottom:5px;}
+.q{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--rule);}
+.q:last-child{border-bottom:none;}
+.q .qt{font-size:14.5px;font-weight:600;margin-bottom:8px;}
+.opts{display:flex;flex-direction:column;gap:6px;}
+.opt{display:flex;align-items:center;gap:9px;padding:7px 10px;border:1px solid var(--rule);border-radius:4px;
+  font-size:14px;cursor:pointer;transition:border-color .15s,background .15s;}
+.opt:hover{border-color:var(--gold);background:#FBF3E2;}
+.opt input{accent-color:var(--pen);}
+.opt.correct{border-color:var(--ok);background:#EAF3EC;}
+.opt.incorrect{border-color:var(--bad);background:#FBEAE8;}
+.footer-nav{display:flex;justify-content:space-between;margin-top:24px;gap:10px;}
+button.btn{font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:11px 20px;border-radius:4px;
+  border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;}
+button.btn.ghost{background:transparent;color:var(--ink);}
+button.btn:active{transform:translateY(1px);}
+.score-banner{text-align:center;padding:22px;border:2px solid var(--ink);margin-bottom:20px;background:var(--paper2);}
+.score-banner .big{font-family:'Lora',serif;font-size:44px;color:var(--pen);font-weight:600;}
+.score-banner .grade{font-size:14px;color:var(--ink-soft);margin-top:4px;}
+.score-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px dashed var(--rule);}
+.score-row b{color:var(--pen);}
+.hidden-until-submit{display:none;}
+.stamp{font-size:11.5px;color:var(--ink-soft);text-align:center;margin-top:26px;}
+@media (max-width:480px){.tabs{gap:4px}.tab{font-size:12px;padding:8px 4px;min-width:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="masthead">
+    <div class="kicker">CUTTING EDGE · ELEMENTARY LEVEL</div>
+    <h1>Comprehensive Achievement Test</h1>
+    <div class="meta">Units 1–14 · Focus: Units 6–14 · 96 marks</div>
+    <div class="fields">
+      <label>Name: <input id="fName" type="text"></label>
+      <label>Date: <input id="fDate" type="text"></label>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="panels"></div>
+
+  <div class="footer-nav">
+    <button class="btn ghost" id="btnPrev">← Back</button>
+    <button class="btn" id="btnNext">Next Part →</button>
+    <button class="btn hidden-until-submit" id="btnSubmit" style="display:none">Submit Test</button>
+  </div>
+  <div class="stamp">Answer every item, then press <em>Submit Test</em> on the last part to see your score.</div>
+</div>
+
+<script>
+// ---------- CONTENT ----------
+const passages = [
+{
+  title:"A Flight Attendant's Day",
+  sub:"Reading 1 — jobs & daily routine",
+  text:`Layla Hassan is a flight attendant for a big airline. She flies to different countries every week, so her days are never the same. Layla usually gets up at four o'clock in the morning when she has an early flight. She checks her uniform, packs a small bag, and drinks a strong cup of coffee before she leaves home.
+At the airport, Layla meets the rest of the crew two hours before takeoff. They have a short meeting with the pilot, who explains the flight time and the weather. After the meeting, the crew welcomes the passengers and helps them find their seats. Layla always smiles, even when she is tired, because she believes a friendly face makes people feel relaxed.
+During the flight, Layla serves food and drinks, answers questions, and checks that everyone wears a seatbelt. Some passengers are nervous flyers, so she talks to them calmly and offers water or tea. She says the most difficult part of the job is not the long hours; it is staying awake when the flight crosses several time zones.
+When the plane lands, Layla does not go home immediately. She often has one or two nights in a hotel before flying back. She uses this free time to explore the new city, try local food, and rest before the return flight. Layla loves visiting places like Istanbul, Bangkok, and Cape Town, and she has a small notebook where she writes about every city she visits.
+Although the job is tiring, Layla does not want to change her career. She enjoys meeting people from different countries and learning new words in other languages. Her family sometimes worries because she travels so much, but they are proud of her too. Next year, Layla hopes to become a senior flight attendant and train new crew members.`,
+  q:[
+    {t:"What time does Layla usually get up for an early flight?", o:["Six o'clock","Four o'clock","Seven o'clock","Five o'clock"], a:1},
+    {t:"How long before takeoff does the crew meet?", o:["One hour","Thirty minutes","Two hours","Three hours"], a:2},
+    {t:"According to Layla, what is the most difficult part of the job?", o:["Serving food","Talking to passengers","Staying awake across time zones","Checking seatbelts"], a:2},
+    {t:"What does Layla do during her free time in a new city?", o:["She stays in her hotel room","She explores, tries food, and rests","She only sleeps","She writes to the airline"], a:1},
+    {t:"What does Layla hope to do next year?", o:["Change her job","Stop traveling","Become a senior flight attendant","Move to Istanbul"], a:2}
+  ],
+  tf:[
+    {t:"Layla's days are usually all the same.", a:false},
+    {t:"The crew meets the pilot before the flight.", a:true},
+    {t:"Layla never talks to nervous passengers.", a:false},
+    {t:"Layla keeps a notebook about the cities she visits.", a:true},
+    {t:"Layla's family does not care about her job.", a:false}
+  ]
+},
+{
+  title:"My Trip to Luxor",
+  sub:"Reading 2 — past simple & travel",
+  text:`Last winter, I visited Luxor with my brother for the first time. We took an early train from Cairo and arrived in the afternoon after a long, comfortable journey along the Nile. Our hotel was small but very clean, and the staff gave us fresh mango juice as soon as we arrived.
+On our first day, we didn't rest at all. We hired a local guide named Karim, who took us straight to the Valley of the Kings. Inside the tombs, the walls were covered with colourful paintings that were thousands of years old. I was amazed by the details, and my brother took so many photos that his phone battery died before lunch.
+The next morning, we woke up before sunrise to visit the Karnak Temple. There were very few tourists at that hour, and the silence made the huge columns feel even more impressive. Karim explained the history patiently and answered every question we asked. Afterwards, we crossed the river by boat to see the Colossi of Memnon, two enormous stone statues that stand alone in a green field.
+In the evening, we walked through the local market and bought spices, scarves, and small souvenirs for our parents. We also tried molokhia, a traditional green soup, at a small family restaurant. The owner was so friendly that he sat with us and told us stories about his grandfather, who used to work as a guide too.
+We stayed in Luxor for four days, and every single day was different from the one before. When we finally returned to Cairo, we felt tired but extremely happy. My brother has already started planning our next trip, and this time he wants to visit Aswan as well.`,
+  q:[
+    {t:"How did the writer travel from Cairo to Luxor?", o:["By plane","By car","By train","By boat"], a:2},
+    {t:"What happened to the brother's phone at the Valley of the Kings?", o:["He lost it","The battery died","It broke","He left it on the bus"], a:1},
+    {t:"Why did they wake up before sunrise?", o:["To catch a train","To visit Karnak Temple with fewer tourists","To eat breakfast early","To meet Karim's family"], a:1},
+    {t:"What did they buy in the local market?", o:["Books and maps","Spices, scarves and souvenirs","Clothes only","Nothing, it was closed"], a:1},
+    {t:"What does the brother want to do next?", o:["Never travel again","Visit Aswan too","Stay in Luxor longer","Become a guide"], a:1}
+  ],
+  tf:[
+    {t:"The writer travelled to Luxor with a friend.", a:false},
+    {t:"Karim was their local guide.", a:true},
+    {t:"The Colossi of Memnon are two stone statues.", a:true},
+    {t:"They tried a traditional soup called molokhia.", a:true},
+    {t:"They stayed in Luxor for one day.", a:false}
+  ]
+},
+{
+  title:"A Big Family Celebration",
+  sub:"Reading 3 — family & celebrations",
+  text:`Every summer, the Farouk family organises a big celebration for the grandparents' wedding anniversary. This year, more than forty relatives have travelled from different cities to attend, and some cousins have flown in from abroad especially for the occasion.
+The preparations start early in the morning. The women in the family cook together in the garden, and the smell of grilled meat and fresh bread fills the whole street. The children run around, play games, and help set the long wooden tables. Uncle Samir always brings his old guitar, and by midday, someone has already started singing.
+This year, the family has decided to do something different. Instead of a simple lunch, they have planned a small ceremony where the grandchildren read letters to their grandparents. Sara, the youngest granddaughter, has written a poem about her grandmother's cooking, and everyone agrees it is the funniest part of the day.
+After lunch, the older relatives sit under the big tree and tell stories about the past, while the younger ones dance to traditional music. Some neighbours have joined the celebration too, because in this family, everyone is always welcome. The grandmother says that these gatherings are more important to her than any gift, because they keep the family close.
+By evening, the guests have eaten cake, taken hundreds of photos, and exchanged phone numbers with cousins they had never met before. As the sun sets, the grandfather stands up and thanks everyone for coming. He says that as long as the family keeps meeting like this, their traditions will never disappear. Everyone claps, and the celebration continues late into the night.`,
+  q:[
+    {t:"What event is the Farouk family celebrating?", o:["A birthday","A wedding anniversary","A graduation","A new house"], a:1},
+    {t:"What have the grandchildren done this year?", o:["Cooked all the food","Read letters to their grandparents","Organised the music","Booked a restaurant"], a:1},
+    {t:"Who wrote a poem about her grandmother's cooking?", o:["Sara","Uncle Samir","The grandmother","A neighbour"], a:0},
+    {t:"According to the grandmother, what is more important than gifts?", o:["Money","Photos","Family gatherings","Traditional music"], a:2},
+    {t:"What does the grandfather say at the end?", o:["The party is too big","Traditions will continue if the family keeps meeting","He is too tired","Next year will be smaller"], a:1}
+  ],
+  tf:[
+    {t:"Only close family members attend the celebration.", a:false},
+    {t:"Uncle Samir brings a guitar every year.", a:true},
+    {t:"The older relatives dance while the younger ones tell stories.", a:false},
+    {t:"Sara's poem is the funniest part of the day.", a:true},
+    {t:"The celebration ends immediately after lunch.", a:false}
+  ]
+}
+];
+
+// Grammar — 30 items, mixed units, deliberately not in unit order
+const grammar = [
+["She ___ to the gym three times a week.",["go","goes","going","gone"],1],
+["Look! It ___ outside.",["rain","rains","is raining","rained"],2],
+["They ___ to Aswan last summer.",["go","went","goes","gone"],1],
+["This bag is ___ than that one.",["heavy","heavier","heaviest","more heavy"],1],
+["Cairo is ___ city in Egypt.",["big","bigger","the biggest","more big"],2],
+["I ___ visit my cousins next weekend.",["am going to","go","went","goes"],0],
+["We ___ our homework yet.",["haven't finished","didn't finish","don't finish","not finished"],0],
+["Is there ___ milk in the fridge?",["some","any","much","many"],1],
+["There aren't ___ apples left.",["some","much","any","a"],2],
+["The meeting starts ___ 9 a.m.",["in","on","at","by"],2],
+["My birthday is ___ March.",["at","on","in","by"],2],
+["___ do you usually go to work?",["What","Where","How","Which"],2],
+["___ is your English teacher?",["Who","What","Where","Whose"],0],
+["You ___ wear a seatbelt in the car.",["can","must","would","may"],1],
+["___ I open the window, please?",["Should","Can","Must","Would"],1],
+["He never ___ breakfast before school.",["eat","eats","eating","ate"],1],
+["We ___ dinner right now.",["have","having","are having","has"],2],
+["Did you ___ the film last night?",["watch","watched","watching","watches"],0],
+["She ___ born in 1998.",["is","was","were","has"],1],
+["This exercise is ___ easy one in the book.",["easier","the easiest","easy","more easy"],1],
+["I ___ finished my report by tomorrow.",["will have","will","am","have"],0],
+["He has already ___ that film twice.",["see","saw","seen","seeing"],2],
+["How ___ sugar do you take in your tea?",["many","much","a lot","some"],1],
+["There are ___ people in the room than before.",["few","fewer","less","little"],1],
+["The bank is ___ the post office and the bakery.",["between","among","under","behind"],0],
+["We arrived ___ the airport at midnight.",["at","in","on","to"],0],
+["___ does this jacket cost?",["How much","How many","What","Which"],0],
+["___ book is this — yours or mine?",["Who","Whose","What","Which"],1],
+["You ___ smoke inside the building.",["can","should","mustn't","would"],2],
+["If it rains tomorrow, we ___ stay at home.",["will","would","are","were"],0]
+];
+
+// Vocabulary — 30 items, mixed topics
+const vocab = [
+["A person who flies planes is a ___.",["pilot","driver","sailor","mechanic"],0],
+["Your mother's sister is your ___.",["cousin","aunt","niece","grandmother"],1],
+["___ is a fruit that is yellow and curved.",["Banana","Onion","Potato","Carrot"],0],
+["When you go on holiday, you usually pack a ___.",["suitcase","wallet","umbrella","fridge"],0],
+["The opposite of 'expensive' is ___.",["cheap","large","fast","clean"],0],
+["When it's very cold, the weather is ___.",["freezing","boiling","humid","mild"],0],
+["We use a ___ to tell the time.",["calendar","clock","map","ruler"],1],
+["The verb for 'to make food ready to eat' is ___.",["cook","clean","climb","carry"],0],
+["When you buy things in a shop, you ___ money.",["spend","save","borrow","lend"],0],
+["The opposite of 'noisy' is ___.",["loud","quiet","busy","fast"],1],
+["A doctor who works with teeth is a ___.",["surgeon","dentist","nurse","chemist"],1],
+["Your brother's son is your ___.",["nephew","cousin","uncle","grandson"],0],
+["___ is a vegetable often used in salad.",["Cucumber","Peach","Grape","Lemon"],0],
+["Before you fly, you must show your ___ at the airport.",["passport","receipt","ticket only","menu"],0],
+["The opposite of 'early' is ___.",["late","soon","fast","near"],0],
+["When the sky has no clouds, it is ___.",["cloudy","sunny","stormy","foggy"],1],
+["A week has ___ days.",["five","six","seven","eight"],2],
+["To 'wash the dishes' means to ___ them.",["clean","cook","buy","break"],0],
+["When you order food, you ask the ___ for the menu.",["waiter","pilot","cashier","farmer"],0],
+["The opposite of 'difficult' is ___.",["hard","easy","strong","slow"],1],
+["A place where you keep money is a ___.",["library","bank","market","hospital"],1],
+["We use an umbrella when it is ___.",["sunny","windy","raining","snowing lightly"],2],
+["Your father's father is your ___.",["uncle","grandfather","nephew","father-in-law"],1],
+["To 'catch a bus' means to ___.",["miss it","get on it","paint it","sell it"],1],
+["The opposite of 'full' is ___.",["empty","heavy","new","open"],0],
+["A person who teaches students is a ___.",["driver","teacher","builder","farmer"],1],
+["We eat breakfast, lunch, and ___.",["snack","dinner","dessert","brunch"],1],
+["To 'try on' clothes in a shop means to ___.",["buy them","wear them to check the size","wash them","return them"],1],
+["A place where planes take off is an ___.",["airport","station","harbour","garage"],0],
+["The opposite of 'to arrive' is ___.",["to leave","to stay","to wait","to return"],0]
+];
+
+function buildQuestion(container, qText, opts, correctIdx, id){
+  const q = document.createElement('div'); q.className='q'; q.dataset.correct=correctIdx; q.dataset.id=id;
+  const t = document.createElement('div'); t.className='qt'; t.textContent = qText; q.appendChild(t);
+  const wrap = document.createElement('div'); wrap.className='opts';
+  opts.forEach((opt,i)=>{
+    const lbl = document.createElement('label'); lbl.className='opt';
+    const inp = document.createElement('input'); inp.type='radio'; inp.name=id; inp.value=i;
+    lbl.appendChild(inp);
+    const span = document.createElement('span'); span.textContent = opt;
+    lbl.appendChild(span);
+    wrap.appendChild(lbl);
+  });
+  q.appendChild(wrap);
+  container.appendChild(q);
+}
+
+// ---------- BUILD PANELS ----------
+const panels = document.getElementById('panels');
+const tabsEl = document.getElementById('tabs');
+const partNames = ["Part 1 — Reading","Part 2 — Grammar","Part 3 — Vocabulary","Results"];
+let qCounter = 0;
+
+partNames.forEach((name,i)=>{
+  const tab = document.createElement('div'); tab.className='tab'+(i===0?' active':'');
+  tab.innerHTML = `<span class="n">${i<3?('Part '+(i+1)):''}</span>${i<3?name.split('— ')[1]:'Results'}`;
+  tab.onclick = ()=>showPanel(i);
+  tabsEl.appendChild(tab);
+
+  const panel = document.createElement('div'); panel.className='panel'+(i===0?' active':''); panel.id='panel'+i;
+  panels.appendChild(panel);
+});
+
+// Reading panel
+const p0 = document.getElementById('panel0');
+passages.forEach((p,pi)=>{
+  const box = document.createElement('div'); box.className='passage';
+  box.innerHTML = `<h3>${p.title}</h3><div class="sub">${p.sub}</div>` + p.text.split('\n').map(t=>`<p>${t}</p>`).join('');
+  p0.appendChild(box);
+  const lbl1 = document.createElement('div'); lbl1.className='qgroup-label'; lbl1.textContent = `Comprehension — Multiple Choice (Passage ${pi+1})`;
+  p0.appendChild(lbl1);
+  p.q.forEach(item=>{ qCounter++; buildQuestion(p0, item.t, item.o, item.a, 'r'+qCounter); });
+  const lbl2 = document.createElement('div'); lbl2.className='qgroup-label'; lbl2.textContent = `True or False (Passage ${pi+1})`;
+  p0.appendChild(lbl2);
+  p.tf.forEach(item=>{ qCounter++; buildQuestion(p0, item.t, ["True","False"], item.a?0:1, 'r'+qCounter); });
+});
+
+// Grammar panel
+const p1 = document.getElementById('panel1');
+const gLabel = document.createElement('div'); gLabel.className='qgroup-label'; gLabel.textContent='Grammar — choose the correct answer (Units 1–14)';
+p1.appendChild(gLabel);
+shuffle(grammar).forEach((item,idx)=>{ buildQuestion(p1, item[0], item[1], item[2], 'g'+idx); });
+
+// Vocabulary panel
+const p2 = document.getElementById('panel2');
+const vLabel = document.createElement('div'); vLabel.className='qgroup-label'; vLabel.textContent='Vocabulary — choose the correct word (Units 1–14)';
+p2.appendChild(vLabel);
+shuffle(vocab).forEach((item,idx)=>{ buildQuestion(p2, item[0], item[1], item[2], 'v'+idx); });
+
+function shuffle(arr){ const a=arr.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+// Results panel placeholder
+const p3 = document.getElementById('panel3');
+p3.innerHTML = `<div class="qgroup-label">Press "Submit Test" from Part 3 to see your results here.</div>`;
+
+// ---------- NAVIGATION ----------
+let current = 0;
+function showPanel(i){
+  document.querySelectorAll('.panel').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+  document.querySelectorAll('.tab').forEach((el,idx)=>el.classList.toggle('active', idx===i));
+  current = i;
+  document.getElementById('btnPrev').style.visibility = i===0?'hidden':'visible';
+  document.getElementById('btnNext').style.display = i<2?'inline-block':'none';
+  document.getElementById('btnSubmit').style.display = i===2?'inline-block':'none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('btnPrev').onclick = ()=>showPanel(Math.max(0,current-1));
+document.getElementById('btnNext').onclick = ()=>showPanel(Math.min(2,current+1));
+document.getElementById('btnSubmit').onclick = submitTest;
+showPanel(0);
+
+function submitTest(){
+  let total=0, correct=0, secScores={reading:[0,30],grammar:[0,30],vocab:[0,30]};
+  document.querySelectorAll('.q').forEach(q=>{
+    const id = q.dataset.id, correctIdx = +q.dataset.correct;
+    const checked = q.querySelector('input[name="'+id+'"]:checked');
+    const section = id.startsWith('r')?'reading':(id.startsWith('g')?'grammar':'vocab');
+    total++; secScores[section][1] = secScores[section][1]; // keep 30 fixed already
+    const opts = q.querySelectorAll('.opt');
+    opts.forEach((o,i)=>{
+      o.classList.remove('correct','incorrect');
+      if(i===correctIdx) o.classList.add('correct');
+      if(checked && +checked.value===i && i!==correctIdx) o.classList.add('incorrect');
+    });
+    if(checked && +checked.value===correctIdx){ correct++; secScores[section][0]++; }
+  });
+  const pct = Math.round((correct/total)*100);
+  let grade = 'Needs Practice';
+  if(pct>=90) grade='Excellent — A';
+  else if(pct>=80) grade='Very Good — B';
+  else if(pct>=70) grade='Good — C';
+  else if(pct>=60) grade='Pass — D';
+  p3.innerHTML = `
+    <div class="score-banner">
+      <div class="big">${correct} / ${total}</div>
+      <div class="grade">${pct}% — ${grade}</div>
+    </div>
+    <div class="score-row"><span>Reading (comprehension + true/false)</span><b>${secScores.reading[0]} / 30</b></div>
+    <div class="score-row"><span>Grammar</span><b>${secScores.grammar[0]} / 30</b></div>
+    <div class="score-row"><span>Vocabulary</span><b>${secScores.vocab[0]} / 30</b></div>
+    <p style="font-size:13.5px;color:var(--ink-soft);margin-top:16px;">Go back to any part to review — correct answers are marked in green, incorrect choices in red.</p>
+  `;
+  showPanel(3);
+}
+</script>
+</body>
+</html>
